@@ -54,6 +54,8 @@ class _GetUserLocationState extends State<GetUserLocation> {
           }
         },
         type: BottomNavigationBarType.fixed,
+        selectedItemColor: Colors.red,
+        
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(
