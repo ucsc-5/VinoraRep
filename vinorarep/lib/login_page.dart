@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget{
   
   class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMixin
   {
-    String _email ,_password,_name,_mobile,_address;
+    String _email ,_password;
     final formKey=new GlobalKey<FormState>();
     ProgressDialog pr;
   
