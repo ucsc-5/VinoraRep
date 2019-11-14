@@ -20,12 +20,12 @@ class _GetUserLocationState extends State<GetUserLocation> {
   @override
   void initState() {
     Firestore.instance
-        .collection('orders')
-        .document(widget.orderId)
+        .collection('retailers')
+        .document(widget.retailerId)
         .get()
         .then((DocumentSnapshot ds) {
           setState(() {
-            index=ds['state'];
+            index=ds['orderState'];
           });
       
     });
@@ -41,11 +41,11 @@ class _GetUserLocationState extends State<GetUserLocation> {
           if(x==0){
 
           }else{
-            final DocumentReference postRef = Firestore.instance.document('orders/${widget.orderId}');
+            final DocumentReference postRef = Firestore.instance.document('retailers/${widget.retailerId}');
             Firestore.instance.runTransaction((Transaction tx) async {
               DocumentSnapshot postSnapshot = await tx.get(postRef);
               if (postSnapshot.exists) {
-                await tx.update(postRef, <String, dynamic>{'state': x});
+                await tx.update(postRef, <String, dynamic>{'orderState': x});
                 setState(() {
                   index=x;
                 });
@@ -274,8 +274,8 @@ class _MapState extends State<Map> {
           void _getUserLocation() async {
             
             Firestore.instance
-            .collection('companies')
-            .document(widget.companyId)
+            .collection('retailers')
+            .document(widget.retailerId)
             .snapshots().listen((data) async{
               
                
@@ -285,11 +285,6 @@ class _MapState extends State<Map> {
 
               });
             });
-            
-           
-            
-            
-              
          
           }
           void getCurrentUserId() async {
