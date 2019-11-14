@@ -1,0 +1,106 @@
+{
+  "project_info": {
+    "project_number": "595154188868",
+    "firebase_url": "https://vinora-dc8a2.firebaseio.com",
+    "project_id": "vinora-dc8a2",
+    "storage_bucket": "vinora-dc8a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595154188868:android:9356ac13d2fcf56857da11",
+        "android_client_info": {
+          "package_name": "com.example.targets"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPGDkTrB_HUXIuxeJzalA44lfuzVquZyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595154188868:android:0f39a61f8017b639",
+        "android_client_info": {
+          "package_name": "com.example.vinora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPGDkTrB_HUXIuxeJzalA44lfuzVquZyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595154188868:android:a7de77a6d3ff92ff",
+        "android_client_info": {
+          "package_name": "com.jcl.vinora"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595154188868-prem0hrdrt9hakfjo4avcf6vf4iio0il.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.jcl.vinora",
+            "certificate_hash": "bca447cdead9d9fa50b17e8bc523a541f9ac462b"
+          }
+        },
+        {
+          "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPGDkTrB_HUXIuxeJzalA44lfuzVquZyo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595154188868-n3g75msshrslmq9p2v24eeuq20kibmto.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
