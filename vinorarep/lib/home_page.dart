@@ -93,7 +93,7 @@ class _HomePageState extends State<HomePage> {
 
   // set up the AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("VinoraMob"),
+    title: Text("VinoraRep"),
     content: Text("Are you sure want to Exit ?"),
     actions: [
       cancelButton,

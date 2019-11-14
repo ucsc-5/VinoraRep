@@ -34,9 +34,9 @@ class _GetUserLocationState extends State<GetUserLocation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Map(companyId:widget.companyId,retailerId: widget.retailerId,),
+      body: Map(companyId:widget.companyId,retailerId: widget.retailerId,orderId: widget.orderId,),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0 ,
+        currentIndex: index ,
         onTap: (x){
           if(x==0){
 
@@ -46,6 +46,9 @@ class _GetUserLocationState extends State<GetUserLocation> {
               DocumentSnapshot postSnapshot = await tx.get(postRef);
               if (postSnapshot.exists) {
                 await tx.update(postRef, <String, dynamic>{'state': x});
+                setState(() {
+                  index=x;
+                });
               }
             });
           }
@@ -88,7 +91,8 @@ class _GetUserLocationState extends State<GetUserLocation> {
 class Map extends StatefulWidget {
   final String companyId;
   final String retailerId;
-  Map({Key key, @required this.companyId,@required this.retailerId}): super(key: key);
+  final String orderId;
+  Map({Key key, @required this.companyId,@required this.retailerId,@required this.orderId}): super(key: key);
   @override
   _MapState createState() => _MapState();
 }
@@ -297,7 +301,7 @@ class _MapState extends State<Map> {
                                         location.onLocationChanged().listen((LocationData currentLocation) async{
                                    
                                     speed=(currentLocation.speed)/1000;
-                                    final DocumentReference postRef = Firestore.instance.document('companies/${widget.companyId}');
+                                    final DocumentReference postRef = Firestore.instance.document('retailers/${widget.retailerId}');
                                     Firestore.instance.runTransaction((Transaction tx) async {
                                       DocumentSnapshot postSnapshot = await tx.get(postRef);
                                       if (postSnapshot.exists) {
@@ -352,13 +356,13 @@ class _MapState extends State<Map> {
       }
     
       void getDestination() {
-        print("abc ${widget.retailerId}");
+        
         Firestore.instance
         .collection('retailers')
         .document(widget.retailerId)
         .snapshots().listen((data) async{
           setState(() {
-            destination=LatLng(data.data['coord'].latitude,data.data['coord'].longitude);
+            destination=LatLng(data.data['iniCoord'].latitude,data.data['iniCoord'].longitude);
             sendRequest(destination);
           });
           
