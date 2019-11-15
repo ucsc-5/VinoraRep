@@ -2,10 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:targets/auth_provider.dart';
 import 'package:targets/chat/chat.dart';
-import 'package:targets/map/location.dart';
-import 'package:targets/map/location.dart' ;
 import '../pages/home_page.dart';
-import '../pages/order_page.dart';
 import '../pages/profile_page.dart';
 import '../auth.dart';
 class MainScreen extends StatefulWidget { 
@@ -24,8 +21,6 @@ class _MainScreenState extends State<MainScreen> {
   
   int currentTab = 0;
   HomePage homePage;
-  OrderPage orderPage;
-  GetUserLocation order;
   Profile profilePage;
 
   List<Widget> pages;

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:targets/components/show_more_button.dart';
 import 'package:targets/components/upper_bar.dart';
 import 'package:targets/map/location.dart';
-import 'package:targets/pages/ordering.dart';
 import 'package:targets/theme.dart';
 
 
