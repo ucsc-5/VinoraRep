@@ -41,6 +41,7 @@ class _HomePageState extends State<HomePage>{
                   Container(
                         width: double.maxFinite,
                         height: double.maxFinite,
+                        color: Colors.white,
                         child: Stack(
                           children: <Widget>[
                             Image.network(
@@ -67,7 +68,7 @@ class _HomePageState extends State<HomePage>{
                                     Container(
                                       height:300,
                                       child:StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('orders').where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).where("state",isGreaterThanOrEqualTo: 0).snapshots(),
+              stream: Firestore.instance.collection('orders').where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError)
                   return new Text('Error: ${snapshot.error}');
@@ -95,10 +96,12 @@ class _HomePageState extends State<HomePage>{
                                   ),
                                 );
                                               },
-                                             
+                                              leading: CircleAvatar(
+                                                child: Icon(Icons.add_shopping_cart),
+                                              ),
                                               title: new Text(document['shopName'],style: AppTheme.headline),
                                               subtitle: Text("Rs : "+document['total'].toString(),style: AppTheme.title,),
-                                              
+                                              trailing: document['state']==0?Text("Pending...",style: TextStyle(color: Colors.yellowAccent,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),):Text("Accepted",style: TextStyle(color: Colors.green,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),),
                                             ),
                                             Divider(),
                                               ],

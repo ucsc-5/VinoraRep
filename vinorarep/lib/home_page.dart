@@ -113,7 +113,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
               appBar: AppBar(
-                title: Text('Vinora'),
+                title: Text('VinoraRep'),
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(Icons.exit_to_app),

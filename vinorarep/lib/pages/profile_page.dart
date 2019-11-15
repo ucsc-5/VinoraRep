@@ -46,21 +46,21 @@ class _ProfileState extends State<Profile> {
     String downloadUrl = await storageTaskSnapshot.ref.getDownloadURL();
                     
                     
-                      final DocumentReference postRef = Firestore.instance.document('retailers/${user.uid}');
+                      final DocumentReference postRef = Firestore.instance.document('salesRepresentatives/${user.uid}');
 Firestore.instance.runTransaction((Transaction tx) async {
   DocumentSnapshot postSnapshot = await tx.get(postRef);
   if (postSnapshot.exists) {
-    await tx.update(postRef, <String, dynamic>{'url': downloadUrl});
+    await tx.update(postRef, <String, dynamic>{'salesRefImagePath': downloadUrl});
   }
 });
 Firestore.instance
-        .collection('retailers')
+        .collection('salesRepresentatives')
         .document(user.uid)
         .get()
         .then((DocumentSnapshot ds) {
           setState(() {
             isLoading=false;
-          imageUrl=ds['url'];
+          imageUrl=ds['salesRefImagePath'];
           });
       // use ds as a snapshot
     });
@@ -81,13 +81,13 @@ Firestore.instance
       Future<String> currentUser() async {
     FirebaseUser user = await _firebaseAuth.currentUser();
     Firestore.instance
-        .collection('retailers')
+        .collection('salesRepresentatives')
         .document(user.uid)
         .get()
         .then((DocumentSnapshot ds) {
           setState(() {
-            name=ds['shopName'];
-            imageUrl=ds['url'];
+            name=ds['fullName'];
+            imageUrl=ds['salesRefImagePath'];
           });
       // use ds as a snapshot
     });
@@ -276,11 +276,11 @@ Firestore.instance
                                                         final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
                                                       FirebaseUser user = await _firebaseAuth.currentUser();
                                                         
-                                                        final DocumentReference postRef = Firestore.instance.document('retailers/${user.uid}');
+                                                        final DocumentReference postRef = Firestore.instance.document('salesRepresentatives/${user.uid}');
 Firestore.instance.runTransaction((Transaction tx) async {
   DocumentSnapshot postSnapshot = await tx.get(postRef);
   if (postSnapshot.exists) {
-    await tx.update(postRef, <String, dynamic>{'shopName': name});
+    await tx.update(postRef, <String, dynamic>{'fullName': name});
   }
 });
                                                               setState(() {
