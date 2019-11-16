@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'dart:io';
+import 'package:dash_chat/dash_chat.dart';
   FirebaseUser user;
   FirebaseAuth auth;
 class Chat extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ChatState extends State<Chat> {
     final Firestore _firestore = Firestore.instance;
   
     TextEditingController messageController = TextEditingController();
-    ScrollController scrollController = ScrollController();
+    ScrollController scrollController = ScrollController(keepScrollOffset: true,initialScrollOffset: 5000000000);
   
     Future<void> callback() async {
       if (messageController.text.length > 0) {
@@ -59,10 +60,13 @@ class _ChatState extends State<Chat> {
           title: Text("Royal Vintage Chat") ,
         ),
         body: SafeArea(
+
           child: Column(
+
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Expanded(
+
                 child: StreamBuilder<QuerySnapshot>(
                   stream: _firestore
                       .collection('messages')
@@ -96,6 +100,7 @@ class _ChatState extends State<Chat> {
               ),
               Container(
                 padding: EdgeInsets.all(10.0),
+
                 child: Row(
                   children: <Widget>[
                     Expanded(
@@ -162,8 +167,8 @@ class Message extends StatelessWidget {
           ),
           Material(
             color: me ? Colors.lightBlue : Colors.white,
-            borderRadius: BorderRadius.circular(10.0),
-            elevation: 6.0,
+            borderRadius: BorderRadius.circular(4.0),
+            
             child: Container(
               padding: EdgeInsets.all(12.0),
               child: Text(
