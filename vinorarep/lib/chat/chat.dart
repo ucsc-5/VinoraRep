@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -109,9 +108,12 @@ class _ChatState extends State<Chat> {
                         controller: messageController,
                       ),
                     ),
-                    SendButton(
-                      text: "Send",
-                      callback: callback,
+                    IconButton(
+                      onPressed: (){
+                        callback();
+                        messageController.clear();
+                      },
+                      icon: Icon(Icons.send),
                     )
                   ],
                 ),
@@ -163,7 +165,7 @@ class Message extends StatelessWidget {
             borderRadius: BorderRadius.circular(10.0),
             elevation: 6.0,
             child: Container(
-              padding: EdgeInsets.all(10.0),
+              padding: EdgeInsets.all(12.0),
               child: Text(
                 text,
               ),
