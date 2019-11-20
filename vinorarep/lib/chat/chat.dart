@@ -9,8 +9,9 @@ import 'package:dash_chat/dash_chat.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';  
 class Chat extends StatefulWidget {
-  
-  
+  String id;
+  Chat({Key key, @required this.id})
+      : super(key: key);
   @override
   _ChatState createState() => _ChatState();
 }
@@ -28,11 +29,22 @@ class _ChatState extends State<Chat> {
           user.name=user1.email;
         });
        }
+       void getAvatar() {
+        Firestore.instance
+        .collection('salesRepresentatives')
+        .document(widget.id)
+        .get()
+        .then((DocumentSnapshot ds) {
+          user.avatar=ds['salesRefImagePath'];
+          user.name=ds['fullName'];
+    });
+      }
   @override
   void initState() {
     user.name = "Name Loading ..";
     user.uid = Uuid().v4().toString();
     getUserId();
+    getAvatar();
     super.initState();
     }
     

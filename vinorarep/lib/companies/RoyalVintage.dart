@@ -85,7 +85,7 @@ class _MainScreenState extends State<MainScreen> {
                                       Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Chat()
+        builder: (context) => Chat(id:widget.retailerId)
       ),
     );
                                     },
