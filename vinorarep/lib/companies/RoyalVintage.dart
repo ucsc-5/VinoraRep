@@ -18,7 +18,7 @@ class MainScreen extends StatefulWidget {
 
 }
 class _MainScreenState extends State<MainScreen> {
-  
+  String id;
   int currentTab = 0;
   HomePage homePage;
   Profile profilePage;
@@ -37,59 +37,69 @@ class _MainScreenState extends State<MainScreen> {
     currentPage = homePage;
     
     super.initState();
+    getUserId();
+        
     
+      }
     
-
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final BaseAuth auth = AuthProvider.of(context).auth;
-    final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    
-    return Scaffold(
-      
-      backgroundColor: Colors.white,
-      resizeToAvoidBottomPadding: false,
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentTab,
-        onTap: (index) {
-          setState(() {
-            currentTab = index;
-            currentPage = pages[index];
-          });
-        },
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            title: Text("Assignning Orders"),
-          ),
+      @override
+      Widget build(BuildContext context) {
+        final BaseAuth auth = AuthProvider.of(context).auth;
+        final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+        
+        return Scaffold(
           
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            title: Text("Profile"),
+          backgroundColor: Colors.white,
+          resizeToAvoidBottomPadding: false,
+          bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentTab,
+            onTap: (index) {
+              setState(() {
+                currentTab = index;
+                currentPage = pages[index];
+              });
+            },
+            type: BottomNavigationBarType.fixed,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                title: Text("Assignning Orders"),
+              ),
+              
+              BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.person,
+                ),
+                title: Text("Profile"),
+              ),
+            ],
           ),
-        ],
-      ),
-      body: currentPage,
-      
-      floatingActionButton: FloatingActionButton (
-                          
-                                    child: Icon(Icons.chat),
-                                    onPressed: (){
-                                      Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => Chat(id:widget.retailerId)
-      ),
-    );
-                                    },
-                                  ),
-    );
-  }
+          body: currentPage,
+          
+          floatingActionButton: FloatingActionButton (
+                              
+                                        child: Icon(Icons.chat),
+                                        onPressed: (){
+                                          Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Chat(id:id)
+          ),
+        );
+                                        },
+                                      ),
+        );
+      }
+    
+      void getUserId() async{
+        final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+        FirebaseUser user1 = await _firebaseAuth.currentUser();
+        setState(() {
+          id=user1.uid;
+          
+          
+        });
+      }
 }

@@ -37,7 +37,9 @@ class _ChatState extends State<Chat> {
         .then((DocumentSnapshot ds) {
           user.avatar=ds['salesRefImagePath'];
           user.name=ds['fullName'];
+          
     });
+
       }
   @override
   void initState() {
