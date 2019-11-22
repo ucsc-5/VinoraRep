@@ -136,7 +136,11 @@ class _HomePageState extends State<HomePage> {
           default:
             return new ListView(
               children: snapshot.data.documents.map((DocumentSnapshot document) {
-                return new ListTile(
+                return new Padding(
+                  padding: EdgeInsets.only(left: 10,right: 10),
+                  child: Column(
+                  children: <Widget>[
+                    ListTile(
                   contentPadding:EdgeInsets.only(top: 10,bottom: 10,left: 10),
                   onTap: (){
                     document['state']=='1'?Navigator.push(
@@ -161,6 +165,10 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(left:10),
                     child:Text(document['address'],style: AppTheme.title,) ,
                   ) ,
+                ),
+                new Divider()
+                  ],
+                ),
                 );
               }).toList(),
             );

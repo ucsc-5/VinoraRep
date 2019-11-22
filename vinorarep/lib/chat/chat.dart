@@ -10,7 +10,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';  
 class Chat extends StatefulWidget {
   String id;
-  Chat({Key key, @required this.id})
+  String retailerId;
+  String companyId;
+  Chat({Key key, @required this.retailerId,@required this.companyId,@required this.id})
       : super(key: key);
   @override
   _ChatState createState() => _ChatState();
@@ -60,7 +62,30 @@ class _ChatState extends State<Chat> {
         documentReference,
         message.toJson(),
       );
+    }).then((onValue){
+          Firestore.instance.runTransaction((Transaction tx) async {
+          DocumentSnapshot postSnapshot = await tx.get(documentReference);
+          if (postSnapshot.exists) {
+            await tx.update(documentReference, <String, dynamic>{'companyId': widget.companyId,'retailerId':widget.retailerId});
+          }
+        }).then((onValue){
+          Firestore.instance
+        .collection('retailers')
+        .document(widget.retailerId)
+        .get()
+        .then((DocumentSnapshot ds) {
+      Firestore.instance.runTransaction((Transaction tx) async {
+          DocumentSnapshot postSnapshot = await tx.get(documentReference);
+          if (postSnapshot.exists) {
+            await tx.update(documentReference, ds.data);
+          }
+        });
+        
     });
+        });
+        
+    
+        });
   }
   void uploadFile() async {
     File result = await ImagePicker.pickImage(
@@ -97,7 +122,30 @@ class _ChatState extends State<Chat> {
           documentReference,
           message.toJson(),
         );
-      });
+      }).then((onValue){
+          Firestore.instance.runTransaction((Transaction tx) async {
+          DocumentSnapshot postSnapshot = await tx.get(documentReference);
+          if (postSnapshot.exists) {
+            await tx.update(documentReference, <String, dynamic>{'companyId': widget.companyId,'retailerId':widget.retailerId});
+          }
+        }).then((onValue){
+          Firestore.instance
+        .collection('retailers')
+        .document(widget.retailerId)
+        .get()
+        .then((DocumentSnapshot ds) {
+      Firestore.instance.runTransaction((Transaction tx) async {
+          DocumentSnapshot postSnapshot = await tx.get(documentReference);
+          if (postSnapshot.exists) {
+            await tx.update(documentReference, ds.data);
+          }
+        });
+        
+    });
+        });
+        
+    
+        });
     }
   }
   
@@ -108,7 +156,7 @@ class _ChatState extends State<Chat> {
           title: Text("Chat") ,
         ),
         body:  StreamBuilder(
-        stream: Firestore.instance.collection('message').snapshots(),
+        stream: Firestore.instance.collection('message').where('retailerId',isEqualTo:widget.retailerId).snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return Center(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:targets/auth_provider.dart';
+import 'package:targets/chat/beforeChat.dart';
 import 'package:targets/chat/chat.dart';
 import '../pages/home_page.dart';
 import '../pages/profile_page.dart';
@@ -85,7 +86,7 @@ class _MainScreenState extends State<MainScreen> {
                                           Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => Chat(id:id)
+            builder: (context) => BChat(companyId:widget.companyId,retailerId:id)
           ),
         );
                                         },
