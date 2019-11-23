@@ -27,7 +27,7 @@ class _BChatState extends State<BChat> {
       ),
       body: Padding(padding: EdgeInsets.all(10),
       child: StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('message').orderBy('createdAt',descending: true).where('companyId',isEqualTo:widget.companyId).limit(1).snapshots(),
+      stream: Firestore.instance.collection('retailers').orderBy('chatTime',descending: true).where('chatState',isEqualTo:1).snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
 
         if (snapshot.hasError)
@@ -53,7 +53,7 @@ class _BChatState extends State<BChat> {
                     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => Chat(retailerId: document['retailerId'],companyId: widget.companyId,id:id),
+        builder: (context) => Chat(retailerId: document.documentID,companyId: widget.companyId,id:id),
       ),
     );
                   },           
