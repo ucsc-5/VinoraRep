@@ -39,8 +39,9 @@ class _BChatState extends State<BChat> {
               children: snapshot.data.documents.map((DocumentSnapshot document) {
                 return new Column(
                   children: <Widget>[
-                    
-                    ListTile(
+                    Dismissible(
+                      key: Key(document.documentID),
+                      child: ListTile(
                   title: new Text(document['shopName'],style: AppTheme.headline,),
                   leading: CircleAvatar(  
                     radius: 30,
@@ -59,6 +60,24 @@ class _BChatState extends State<BChat> {
                   },           
                               
                 ),
+                background: Container(
+                                                              color: Colors.red,
+                                                              padding: EdgeInsets.all(15),
+                                                              child: Text("Delete ?",textScaleFactor: 1.5,style: TextStyle(color: Colors.white),),
+                                                            ),
+                onDismissed: (direction){
+                    final DocumentReference postRef = Firestore.instance.document('retailers/${document.documentID}');
+                                                              Firestore.instance.runTransaction((Transaction tx) async {
+                                                                DocumentSnapshot postSnapshot = await tx.get(postRef);
+                                                                if (postSnapshot.exists) {
+                                                                  await tx.update(postRef, <String, dynamic>{'chatState':0});
+                                                                }
+                                                              });
+                                                           
+                  
+                  }
+                    )
+                    ,
                 new Divider()
                   ],
                 );
