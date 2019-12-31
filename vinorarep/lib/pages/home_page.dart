@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage>{
                                     Container(
                                       height:300,
                                       child:StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('orders').where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).snapshots(),
+              stream: Firestore.instance.collection('orders').where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).where('state',isGreaterThan: -1).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError)
                   return new Text('Error: ${snapshot.error}');
