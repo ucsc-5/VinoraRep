@@ -305,9 +305,6 @@ class _MapState extends State<Map> {
                                         await tx.update(postRef, <String, dynamic>{'coord': new GeoPoint(currentLocation.latitude,currentLocation.longitude)});
                                       }
                                     });
-                                   
-                                    
-         
          
     });
                                         

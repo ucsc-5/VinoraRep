@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:targets/pages/profile_page.dart';
 import 'package:targets/theme.dart';
 import 'auth.dart';
 import 'auth_provider.dart';
@@ -29,17 +30,19 @@ class _HomePageState extends State<HomePage> {
   }
   Future<String> currentUser() async {
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    Firestore.instance
+    FirebaseUser user = await _firebaseAuth.currentUser().then((onValue){
+      Firestore.instance
         .collection('salesRepresentatives')
-        .document(user.uid)
+        .document(onValue.uid)
         .get()
         .then((DocumentSnapshot ds) {
           setState(() {
-            url=ds['salesRefImagePath'];
+            url=ds.data['salesRefImagePath'];
           });
       // use ds as a snapshot
     });
+    });
+    
     
       return user != null ? user.uid : null;
   }
@@ -47,24 +50,28 @@ class _HomePageState extends State<HomePage> {
   Future<String> getUserId() async{
     final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
     
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    id=user.uid;
-    Firestore.instance
+    FirebaseUser user = await _firebaseAuth.currentUser().then((onValue){
+      Firestore.instance
         .collection('salesRepresentatives')
-        .document(user.uid)
+        .document(onValue.uid)
         .get()
         .then((DocumentSnapshot ds) {
+          getCompanyId(onValue.uid);
           setState(() {
             setState(() {
-        name=ds['fullName'];
-        email=ds['email'];
+              id=onValue.uid;
+        name=ds.data['fullName'];
+        email=ds.data['email'];
         firstLetter=name.substring(0,1).toUpperCase();
       });
           });
       // use ds as a snapshot
     });
+    });
     
-    getCompanyId(user.uid);
+    
+    
+    
     return user != null ? user.uid : null;
   }
   
@@ -202,33 +209,15 @@ class _HomePageState extends State<HomePage> {
                                                 ListTile(
                                                   title: Text("My Profile"),
                                                   onTap: (){
-                                        
+                                                    Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Profile()
+          ),
+        );
                                                   },
                                                 ),
-                                                ListTile(
-                                                  title: Text("My Profile"),
-                                                  onTap: (){
-                                        
-                                                  },
-                                                ),
-                                                ListTile(
-                                                  title: Text("My Profile"),
-                                                  onTap: (){
-                                        
-                                                  },
-                                                ),
-                                                ListTile(
-                                                  title: Text("My Profile"),
-                                                  onTap: (){
-                                        
-                                                  },
-                                                ),
-                                                ListTile(
-                                                  title: Text("Exit"),
-                                                  onTap: (){
-                                        
-                                                  },
-                                                ),
+                                                
                                                 ],
                                               ),
                                                 ),

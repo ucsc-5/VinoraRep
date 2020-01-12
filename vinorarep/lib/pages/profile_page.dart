@@ -79,18 +79,21 @@ Firestore.instance
         
       }
       Future<String> currentUser() async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    Firestore.instance
+    FirebaseUser user = await _firebaseAuth.currentUser().then((onValue){
+      Firestore.instance
         .collection('salesRepresentatives')
-        .document(user.uid)
+        .document(onValue.uid)
         .get()
         .then((DocumentSnapshot ds) {
           setState(() {
-            name=ds['fullName'];
-            imageUrl=ds['salesRefImagePath'];
+            
+            name=ds.data['fullName'];
+            imageUrl=ds.data['salesRefImagePath'];
           });
       // use ds as a snapshot
     });
+    });
+    
    
       return user != null ? user.uid : null;
   }

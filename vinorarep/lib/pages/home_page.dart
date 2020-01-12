@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage>{
                                     Container(
                                       height:300,
                                       child:StreamBuilder<QuerySnapshot>(
-              stream: Firestore.instance.collection('orders').where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).where('state',isGreaterThan: -1).snapshots(),
+              stream: Firestore.instance.collection('orders').where("state", isGreaterThan: -1).where("companyId", isEqualTo: widget.companyId).where("salesRepId",isEqualTo: userId).snapshots(),
               builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasError)
                   return new Text('Error: ${snapshot.error}');
@@ -100,7 +100,7 @@ class _HomePageState extends State<HomePage>{
                                               ),
                                               title: new Text(document['shopName'],style: AppTheme.headline),
                                               subtitle: Text("Rs : "+document['total'].toString(),style: AppTheme.title,),
-                                              trailing: document['state']==0?Text("Pending...",style: TextStyle(color: Colors.yellowAccent,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),):Text("Accepted",style: TextStyle(color: Colors.green,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),),
+                                              trailing: document['state']==0?Text("Pending...",style: TextStyle(color: Colors.orange,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),):Text("Accepted",style: TextStyle(color: Colors.green,fontStyle: FontStyle.italic,fontWeight: FontWeight.bold),),
                                             ),
                                             Divider(),
                                               ],
@@ -125,11 +125,13 @@ class _HomePageState extends State<HomePage>{
                             
                               void getUserId() async{
                                 final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-                                 FirebaseUser user = await _firebaseAuth.currentUser();
-                                  setState(() {
-                                    userId=user.uid;
+                                 FirebaseUser user = await _firebaseAuth.currentUser().then((onValue){
+                                   setState(() {
+                                    userId=onValue.uid;
                                     
                                   });
+                                 });
+                                  
                               }
                         
                    
