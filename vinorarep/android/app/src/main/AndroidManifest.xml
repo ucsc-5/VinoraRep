@@ -17,7 +17,7 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="vinorarep"
         android:icon="@mipmap/launcher_icon">
-        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBhDflq5iJrXIcKpeq0IzLQPQpOboX91lY"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value=""/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

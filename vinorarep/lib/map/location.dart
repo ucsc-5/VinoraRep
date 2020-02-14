@@ -109,7 +109,6 @@ class _MapState extends State<Map> {
   final Set<Marker> _markers={};
   final Set<Polyline> _polyLines={};
   double distance=0;
-  String destinationPoint=null;
   LatLng preLocation;
   LatLng destination;
   double speed=0;
@@ -283,17 +282,18 @@ class _MapState extends State<Map> {
                
               setState(() {
                 _initialPosition=LatLng(data.data['coord'].latitude,data.data['coord'].longitude);
-                getDestination();
+                
 
               });
+              getDestination();
             });
          
           }
           void getCurrentUserId() async {
                                       final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-                                      FirebaseUser user = await _firebaseAuth.currentUser();
-                                      setState(() {
-                                        userId=user.uid;
+                                      FirebaseUser user = await _firebaseAuth.currentUser().then((onValue){
+                                        setState(() {
+                                        userId=onValue.uid;
                                         var location=new Location();
                                         location.onLocationChanged().listen((LocationData currentLocation) async{
                                    
@@ -310,16 +310,19 @@ class _MapState extends State<Map> {
                                         
                                      
                                       });
+                                      });
+                                      
                                       
                                     }
     
           void sendRequest(LatLng intendedLocation) async {
-        
+        //print(_initialPosition);
         LatLng destination = LatLng(intendedLocation.latitude, intendedLocation.longitude);
         _addMarker(destination, "Your Location");
         String route = await _googleMapsServices.getRouteCoordinates(
-            _initialPosition, destination);
+            _initialPosition, intendedLocation);
         _createRoute(route);
+        
         setState(() {
          getDistance(_initialPosition.latitude, _initialPosition.longitude, intendedLocation.latitude, intendedLocation.longitude) ;
         });
@@ -357,9 +360,9 @@ class _MapState extends State<Map> {
         .snapshots().listen((data) async{
           setState(() {
             destination=LatLng(data.data['iniCoord'].latitude,data.data['iniCoord'].longitude);
-            sendRequest(destination);
+            
           });
-          
+          sendRequest(destination);
         });
       }
   

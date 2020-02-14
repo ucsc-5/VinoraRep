@@ -12,11 +12,11 @@ class MyApp extends StatelessWidget {
       auth: Auth(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,        
-        title: 'Vinora',
+        title: 'VinoraRep',
         theme: ThemeData(
-          primarySwatch: Colors.blueGrey,
+          primarySwatch: Colors.deepPurple,
         ),
-        home: SplashScreen1(title: 'VinoraMob'),
+        home: SplashScreen1(title: 'VinoraRep'),
       ),
     );
   }
