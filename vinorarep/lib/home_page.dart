@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                         ListTile(
                       contentPadding:EdgeInsets.only(top: 10,bottom: 10,left: 10),
                       onTap: (){
-                        document['state']=='1'?Navigator.push(
+                        document['state']==1?Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => MainScreen(name:document['companyName'],address:document['address'],contactNumber:document['contactNumber'],imagePath:document['imagePath'],companyId: document['companyId'],retailerId: document['retailerId'],),
