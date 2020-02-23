@@ -207,6 +207,7 @@ class _HomePageState extends State<HomePage> {
                                 ])),
                                                 ),
                                                 ListTile(
+                                                  leading: Icon(Icons.insert_emoticon),
                                                   title: Text("My Profile"),
                                                   onTap: (){
                                                     Navigator.push(

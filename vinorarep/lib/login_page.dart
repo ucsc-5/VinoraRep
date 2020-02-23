@@ -66,6 +66,7 @@ class LoginPage extends StatefulWidget{
                                   return [Padding(
                                 padding: const EdgeInsets.only(bottom: 15),
                                 child:new TextFormField(
+                                  key: Key("email-field"),
                                   style: TextStyle(color: Colors.black,),
                                   
                                 decoration: new InputDecoration(
@@ -84,6 +85,7 @@ class LoginPage extends StatefulWidget{
                               Padding(
                                 padding: const EdgeInsets.only(bottom: 15),
                                 child:new TextFormField(
+                                  key: Key("password-field"),
                                 decoration: new InputDecoration(
                                   filled: true,
                                   fillColor: Colors.white,
@@ -107,7 +109,7 @@ class LoginPage extends StatefulWidget{
                                 width: 150,
                                 height: 45,
                                 child:RaisedButton (    
-                                           
+                                key: Key("signIn"),           
                                 shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                                 child: new Text("Login",
                                 style: new TextStyle(fontSize: 20.0,color: Colors.black,)),
@@ -176,9 +178,9 @@ class LoginPage extends StatefulWidget{
                 
                                  List<Widget> logo() {
                                    AssetImage assetImage=AssetImage('images/logo1.png');
-                                   Image image=Image(image:assetImage,width: 150,height: 150);
+                                   Image image=Image(image:assetImage,width: 200,height: 200);
                                return[
-                                 SizedBox(height:50.0),
+                                 SizedBox(height:10.0),
                                  Text("VinoraRep",style: TextStyle(
                                    fontSize: 45.0,
                                    fontFamily: 'KAUSHANSCRIPT',
@@ -209,7 +211,7 @@ class LoginPage extends StatefulWidget{
                                      textScaleFactor: 1, style: new TextStyle(
                                        letterSpacing: 3,
                                        fontWeight: FontWeight.bold,),),
-                                       SizedBox(height: 10,)
+                                       SizedBox(height: 5,)
                                    ];
                              }
               
